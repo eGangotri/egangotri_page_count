@@ -1,0 +1,23 @@
+<p>
+  Use this to Count the pages in PDF Files
+</p>
+<p>
+  <input type="file" (change)="uploadFolder($event)" multiple accept="pdf/*" />
+</p>
+<table *ngIf='result?.length > 0'>
+  <tr>
+    <th>#</th>
+    <th>File Name</th>
+    <th>Page Count</th>
+  </tr>
+  <tr *ngFor="let row of result;let indexOfelement=index;">
+    <td>{{indexOfelement}}</td>
+    <td>{{row.name}}</td>
+    <td>{{row.pageCount}}</td>
+  </tr>
+  <tfoot>
+    <td></td>
+    <td></td>
+    <td>{{globalCount}}</td>
+  </tfoot>
+</table>
