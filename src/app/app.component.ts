@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ClipboardModule} from '@angular/cdk/clipboard';
+import { PDFDocument } from 'pdf-lib';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,12 @@ export class AppComponent {
   title = 'eGangotri-page-counter';
   globalCount = 0;
   result: any[] = [];
+  isWait = false;
+
+  resetToDefault() {
+    this.globalCount = 0
+    this.result = []
+  }
 
   clipboardResult(){
     let clipBoardData = ""
@@ -24,42 +30,37 @@ export class AppComponent {
   }
 
   async uploadFolder(event: any) {
-    this.globalCount = 0
-    this.result = []
+    this.resetToDefault();
+    this.isWait = true;
+    console.log('set to true');
     const files = event.target.files;
+    let promiseArr = []
     for (let i = 0; i <= files.length; i++) {
       let file = files[i]
       if (file && file?.name.indexOf(".pdf") > 0) {
-        this.countPages(file, i + 1).then((_count) => {
-        })
+        promiseArr.push(await this.countPages(file, i + 1));
       }
     }
-  }
-
-  countPages(fileInfo: File, counter: number) {
-
-    let count = 0
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      try {
-        reader.readAsBinaryString(fileInfo);
-        reader.onloadend = () => {
-          const res: string | undefined = reader.result?.toString();
-          count = res?.match(/\/Type[\s]*\/Page[^s]/g)?.length || 0;
-          this.result.push({ counter, name: fileInfo.name, pageCount: count });
-          this.globalCount += count;
-          resolve(count);
-        }
-
-        // Make sure to handle error states
-        reader.onerror = function (e: any) {
-          console.log("reader.onerror: ", e);
-          reject(e);
-        };
-      }
-      catch (err) {
-        console.log("err: ", err);
-      }
+    
+    await Promise.all(promiseArr).then((values) => {
+      console.log(values);
+      this.isWait = false;
+      console.log('set to false');
     });
   }
+
+  async countPages(file:File, counter: number=0){
+    return file.arrayBuffer().then(async (buffer) =>  {
+      const pdfDoc4 = await PDFDocument.load(buffer,{ ignoreEncryption: true })
+      const pageCount = pdfDoc4.getPageCount()
+      this.result.push({ name: file.name, pageCount: pageCount });
+      this.globalCount += pageCount;
+       console.log(`totalPages ${file.name}: ${pageCount}`);
+       return pageCount;
+    }).catch((err) =>{
+      console.log("Err", err);
+      return 0;
+    });
+  }
+
 }

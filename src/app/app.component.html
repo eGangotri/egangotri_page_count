@@ -1,31 +1,38 @@
-<p>
-  Use this to Count the pages in PDF Files
-</p>
-<p>
-  <input type="file" (change)="uploadFolder($event)" multiple accept="pdf/*" />
-</p>
-<table *ngIf='result && result.length'>
-    <!-- 
-       
-    -->
+<body class="mainFile">
+  <p>
+    Use this to Count the pages in PDF Files
+  </p>
+  <p>
+    <input type="file" (change)="uploadFolder($event)" multiple accept="pdf/*" />
+  </p>
+
+  <span *ngIf='result && result.length'>
+    <div class="overlay">
+      <div class="center">
+        <mat-spinner *ngIf="isWait" diameter="40" color="accent"></mat-spinner>
+      </div>
+    </div>
     <button mat-fab color="primary" aria-label="Click to Copy" [cdkCopyToClipboard]="clipboardResult()">
       <mat-icon>copy_all</mat-icon>
     </button>
-  <p id="resultTable">
-  <tr>
-    <th>#</th>
-    <th>File Name</th>
-    <th>Page Count</th>
-  </tr>
-  <tr *ngFor="let row of result;let indexOfelement=index;">
-    <td>{{indexOfelement+1}}</td>
-    <td>{{row.name}}</td>
-    <td>{{row.pageCount}}</td>
-  </tr> 
-  <tfoot class="tableLine">
-    <td></td>
-    <td></td>
-    <td>{{globalCount}}</td>
-  </tfoot>
-</p>
-</table>
+    <table>
+      <p id="resultTable">
+        <tr>
+          <th>#</th>
+          <th>File Name</th>
+          <th>Page Count</th>
+        </tr>
+        <tr *ngFor="let row of result;let indexOfelement=index;">
+          <td>{{indexOfelement+1}}</td>
+          <td>{{row.name}}</td>
+          <td align="right">{{row.pageCount}}</td>
+        </tr>
+        <tfoot class="tableLine">
+          <td></td>
+          <td></td>
+          <td align="right">{{globalCount}}</td>
+        </tfoot>
+      </p>
+    </table>
+  </span>
+</body>
