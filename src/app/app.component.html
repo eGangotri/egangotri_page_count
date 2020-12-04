@@ -3,36 +3,55 @@
     Use this to Count the pages in PDF Files
   </p>
   <p>
-    <input type="file" (change)="uploadFolder($event)" multiple accept="pdf/*" />
+    <input type="file" (click)="isWait=true" (change)="uploadFolder($event)" multiple accept="pdf/*" />
   </p>
 
   <span *ngIf='result && result.length'>
-    <div class="overlay">
-      <div class="center">
-        <mat-spinner *ngIf="isWait" diameter="40" color="accent"></mat-spinner>
-      </div>
+    <div class="center">
+      <mat-spinner *ngIf="isWait" diameter="40" color="accent"></mat-spinner>
     </div>
-    <button mat-fab color="primary" aria-label="Click to Copy" [cdkCopyToClipboard]="clipboardResult()">
-      <mat-icon>copy_all</mat-icon>
-    </button>
-    <table>
-      <p id="resultTable">
-        <tr>
-          <th>#</th>
-          <th>File Name</th>
-          <th>Page Count</th>
-        </tr>
-        <tr *ngFor="let row of result;let indexOfelement=index;">
-          <td>{{indexOfelement+1}}</td>
-          <td>{{row.name}}</td>
-          <td align="right">{{row.pageCount}}</td>
-        </tr>
-        <tfoot class="tableLine">
-          <td></td>
-          <td></td>
-          <td align="right">{{globalCount}}</td>
-        </tfoot>
-      </p>
-    </table>
+    <div>
+        <table>
+          <p id="resultTable">
+            <tr>
+              <th>#</th>
+              <th>File Name</th>
+              <th>Page Count</th>
+            </tr>
+            <tr *ngFor="let row of result;let indexOfelement=index;">
+              <td>{{indexOfelement+1}}</td>
+              <td>{{row.name}}</td>
+              <td align="right">{{row.pageCount}}</td>
+            </tr>
+            <tfoot class="tableLine">
+              <tr>
+              <td></td>
+              <td>Grand Total</td>
+              <td align="right">{{globalCount}}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <button (click)="confirmationAlert()" tooltip="Click to Copy the Results"  mat-raised-button color="primary" [cdkCopyToClipboard]="clipboardResult()">Copy Results
+                  <mat-icon>content_copy
+                  </mat-icon>
+                </button>
+              </td>
+              <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <button (click)="result=[]" tooltip="Click to Copy the Results"  mat-raised-button color="primary">Clear Results
+                    <mat-icon matTooltip="Clear Board">clear</mat-icon>
+                  </button>
+                </td>
+                <td></td>
+                </tr>
+            </tfoot>
+          </p>
+        </table>
+    </div>
+
   </span>
 </body>

@@ -29,6 +29,10 @@ export class AppComponent {
     return clipBoardData;
   }
 
+  confirmationAlert(){
+    alert('Results Copied')
+  }
+
   async uploadFolder(event: any) {
     this.resetToDefault();
     this.isWait = true;
@@ -38,7 +42,7 @@ export class AppComponent {
     for (let i = 0; i <= files.length; i++) {
       let file = files[i]
       if (file && file?.name.indexOf(".pdf") > 0) {
-        promiseArr.push(await this.countPages(file, i + 1));
+        promiseArr.push(await this.countPages(file));
       }
     }
     
@@ -49,7 +53,7 @@ export class AppComponent {
     });
   }
 
-  async countPages(file:File, counter: number=0){
+  async countPages(file:File){
     return file.arrayBuffer().then(async (buffer) =>  {
       const pdfDoc4 = await PDFDocument.load(buffer,{ ignoreEncryption: true })
       const pageCount = pdfDoc4.getPageCount()

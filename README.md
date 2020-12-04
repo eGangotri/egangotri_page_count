@@ -15,7 +15,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ng build --prod
 copy /dist folder into /docs folder
-rum 
+run
 ng build --prod --baseHref='https://eGangotri.github.io/egangotri_page_count/'
 
 
