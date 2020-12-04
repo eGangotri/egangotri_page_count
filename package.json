@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "build_for_hosting_in_github": "ng build --prod --baseHref='https://eGangotri.github.io/egangotri_page_count/'",
-    "copy_to_doc": "cpx \"./dist/eGangotri-page-counter/**\" ./docs/",
-    "buld_and_copy_to_doc": "npm run build_for_hosting_in_github && npm run copy_to_doc",
+    "build": "ng build",    
+    "build_for_prod": "ng build  --prod",
+    "deploy": "ng build --prod --baseHref='https://eGangotri.github.io/egangotri_page_count/'",
+    "copy_to_docs": "cpx \"./dist/eGangotri-page-counter/**\" ./docs/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
