@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-root',
@@ -10,20 +11,29 @@ export class AppComponent {
   globalCount = 0;
   result: any[] = [];
 
+  clipboardResult(){
+    let clipBoardData = ""
+    for (let i = 0; i <= this.result.length; i++) {
+      let res = this.result[i]
+      if(res){
+        clipBoardData += `${res?.name} ${res?.pageCount}\n`
+      }
+    }
+    clipBoardData += `Total: ${this.globalCount}`;
+    return clipBoardData;
+  }
+
   async uploadFolder(event: any) {
     this.globalCount = 0
     this.result = []
     const files = event.target.files;
-    console.log("event.target: ", files);
     for (let i = 0; i <= files.length; i++) {
       let file = files[i]
       if (file && file?.name.indexOf(".pdf") > 0) {
         this.countPages(file, i + 1).then((_count) => {
-          console.log(`_count: ${_count}`);
         })
       }
     }
-    console.log(this.result)
   }
 
   countPages(fileInfo: File, counter: number) {
@@ -43,6 +53,7 @@ export class AppComponent {
 
         // Make sure to handle error states
         reader.onerror = function (e: any) {
+          console.log("reader.onerror: ", e);
           reject(e);
         };
       }
