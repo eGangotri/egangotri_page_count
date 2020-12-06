@@ -3,8 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
 
 View Execution at:
- https://egangotri.github.io/egangotri_page_count/
-
+https://egangotri.herokuapp.com/
 
 ## Development server
 
@@ -14,27 +13,13 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## Build
 
 ng build --prod
-copy /dist folder into /docs folder
-run
-ng build --prod --baseHref='https://eGangotri.github.io/egangotri_page_count/'
 
+## Deploy to Heroku
 
-Make Sure:
-To use master/docs  for Publishing 
-https://github.com/eGangotri/egangotri_page_count/settings
-Source
-Your GitHub Pages site is currently being built from the /docs folder in the master branch. Learn more.
-
->>
-Your site is ready to be published at https://egangotri.github.io/egangotri_page_count/.
-
-
-Ref:
-https://dzone.com/articles/deploy-angular-app-on-github-pages
-
-##If using Heroku
 https://dashboard.heroku.com/apps/egangotri/deploy/github
+
 https://itnext.io/how-to-deploy-angular-application-to-heroku-1d56e09c5147
+https://medium.com/better-programming/how-to-deploy-your-angular-9-app-to-heroku-in-minutes-51d171c2f0d
 
 ## Running unit tests
 

@@ -36,30 +36,30 @@ export class AppComponent {
   async uploadFolder(event: any) {
     this.resetToDefault();
     this.isWait = true;
-    console.log('set to true');
+    console.log('isWait set to true');
     const files = event.target.files;
     let promiseArr = []
     for (let i = 0; i <= files.length; i++) {
       let file = files[i]
       if (file && file?.name.indexOf(".pdf") > 0) {
-        promiseArr.push(await this.countPages(file));
+        promiseArr.push(await this.countPages(file,i));
       }
     }
     
     await Promise.all(promiseArr).then((values) => {
       console.log(values);
       this.isWait = false;
-      console.log('set to false');
+      console.log('isWait set to false');
     });
   }
 
-  async countPages(file:File){
+  async countPages(file:File, counter:number = 0){
     return file.arrayBuffer().then(async (buffer) =>  {
       const pdfDoc4 = await PDFDocument.load(buffer,{ ignoreEncryption: true })
       const pageCount = pdfDoc4.getPageCount()
       this.result.push({ name: file.name, pageCount: pageCount });
       this.globalCount += pageCount;
-       console.log(`totalPages ${file.name}: ${pageCount}`);
+       console.log(`Page Count # ${counter+1} ${file.name}: ${pageCount}`);
        return pageCount;
     }).catch((err) =>{
       console.log("Err", err);
