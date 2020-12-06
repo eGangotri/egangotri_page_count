@@ -22,7 +22,7 @@ export class AppComponent {
     for (let i = 0; i <= this.result.length; i++) {
       let res = this.result[i]
       if(res){
-        clipBoardData += `${res?.name} ${res?.pageCount}\n`
+        clipBoardData += `${res?.counter} ${res?.name} ${res?.pageCount}\n`
       }
     }
     clipBoardData += `Total: ${this.globalCount}`;
@@ -57,9 +57,10 @@ export class AppComponent {
     return file.arrayBuffer().then(async (buffer) =>  {
       const pdfDoc4 = await PDFDocument.load(buffer,{ ignoreEncryption: true })
       const pageCount = pdfDoc4.getPageCount()
-      this.result.push({ name: file.name, pageCount: pageCount });
+      const row = { counter: counter+1, name: file.name, pageCount: pageCount };
+      this.result.push(row);
       this.globalCount += pageCount;
-       console.log(`Page Count # ${counter+1} ${file.name}: ${pageCount}`);
+       console.log(`Page Count # ${JSON.stringify(row)}`);
        return pageCount;
     }).catch((err) =>{
       console.log("Err", err);
