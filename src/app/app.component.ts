@@ -57,7 +57,7 @@ export class AppComponent {
     return file.arrayBuffer().then(async (buffer) =>  {
       const pdfDoc4 = await PDFDocument.load(buffer,{ ignoreEncryption: true })
       const pageCount = pdfDoc4.getPageCount()
-      const row = { counter: counter+1, name: file.name, pageCount: pageCount };
+      const row = { counter: "("+ (counter+1) + ")." , name: file.name, pageCount: pageCount };
       this.result.push(row);
       this.globalCount += pageCount;
        console.log(`Page Count # ${JSON.stringify(row)}`);

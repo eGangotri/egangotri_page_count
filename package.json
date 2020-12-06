@@ -4,14 +4,15 @@
   "scripts": {
     "ng": "ng",
     "ng_start": "ng serve",
-    "start": "node server.js",
+    "start": "npm run build_for_prod && node server.js",
     "build": "ng build",
     "build_for_prod": "ng build  --prod",
     "copy_to_docs": "cpx \"./dist/eGangotri-page-counter/**\" ./docs/eGangotri-page-counter/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod",
+    "git": "git add . && git commit -m 'commit' && git push"
   },
   "private": true,
   "dependencies": {
