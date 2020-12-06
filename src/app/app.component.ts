@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { PDFDocument } from 'pdf-lib';
+import { DatePipe } from '@angular/common';
+import { Stats } from './stats';
 
 @Component({
   selector: 'app-root',
@@ -9,19 +11,23 @@ import { PDFDocument } from 'pdf-lib';
 export class AppComponent {
   title = 'eGangotri-page-counter';
   globalCount = 0;
-  result: any[] = [];
   isWait = false;
+  stats: Stats = new Stats();
+
+  constructor(private datePipe: DatePipe) {
+  }
 
   resetToDefault() {
     this.globalCount = 0
-    this.result = []
+    this.stats.result = []
   }
 
-  clipboardResult(){
-    let clipBoardData = ""
-    for (let i = 0; i <= this.result.length; i++) {
-      let res = this.result[i]
-      if(res){
+  clipboardResult() {
+    this.stats.header = "Page Count @ " + this.datePipe.transform(new Date(), 'd MMM yyyy hh:mm aa' + "\n")
+    let clipBoardData = this.stats.header;
+    for (let i = 0; i <= this.stats.result.length; i++) {
+      let res = this.stats.result[i]
+      if (res) {
         clipBoardData += `${res?.counter} ${res?.name} ${res?.pageCount}\n`
       }
     }
@@ -29,7 +35,7 @@ export class AppComponent {
     return clipBoardData;
   }
 
-  confirmationAlert(){
+  confirmationAlert() {
     alert('Results Copied')
   }
 
@@ -42,10 +48,10 @@ export class AppComponent {
     for (let i = 0; i <= files.length; i++) {
       let file = files[i]
       if (file && file?.name.indexOf(".pdf") > 0) {
-        promiseArr.push(await this.countPages(file,i));
+        promiseArr.push(await this.countPages(file, i));
       }
     }
-    
+
     await Promise.all(promiseArr).then((values) => {
       console.log(values);
       this.isWait = false;
@@ -53,16 +59,16 @@ export class AppComponent {
     });
   }
 
-  async countPages(file:File, counter:number = 0){
-    return file.arrayBuffer().then(async (buffer) =>  {
-      const pdfDoc4 = await PDFDocument.load(buffer,{ ignoreEncryption: true })
+  async countPages(file: File, counter: number = 0) {
+    return file.arrayBuffer().then(async (buffer) => {
+      const pdfDoc4 = await PDFDocument.load(buffer, { ignoreEncryption: true })
       const pageCount = pdfDoc4.getPageCount()
-      const row = { counter: "("+ (counter+1) + ")." , name: file.name, pageCount: pageCount };
-      this.result.push(row);
+      const row = { counter: "(" + (counter + 1) + ").", name: file.name, pageCount: pageCount };
+      this.stats.result.push(row);
       this.globalCount += pageCount;
-       console.log(`Page Count # ${JSON.stringify(row)}`);
-       return pageCount;
-    }).catch((err) =>{
+      console.log(`Page Count # ${JSON.stringify(row)}`);
+      return pageCount;
+    }).catch((err) => {
       console.log("Err", err);
       return 0;
     });

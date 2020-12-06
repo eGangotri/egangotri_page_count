@@ -15,8 +15,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ng build --prod
 
 ## Deploy to Heroku
-
+Dashboard:
 https://dashboard.heroku.com/apps/egangotri/deploy/github
+Currently set to Auto-Deply. Can be changed to Manual Deploy
 
 https://itnext.io/how-to-deploy-angular-application-to-heroku-1d56e09c5147
 https://medium.com/better-programming/how-to-deploy-your-angular-9-app-to-heroku-in-minutes-51d171c2f0d
