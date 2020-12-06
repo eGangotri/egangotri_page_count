@@ -32,6 +32,10 @@ Your site is ready to be published at https://egangotri.github.io/egangotri_page
 Ref:
 https://dzone.com/articles/deploy-angular-app-on-github-pages
 
+##If using Heroku
+https://dashboard.heroku.com/apps/egangotri/deploy/github
+https://itnext.io/how-to-deploy-angular-application-to-heroku-1d56e09c5147
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
