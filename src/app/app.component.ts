@@ -9,7 +9,7 @@ import { Stats } from './stats';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'eGangotri-page-counter';
+  title = 'eGangotri Page Counter';
   globalCount = 0;
   isWait = false;
   stats: Stats = new Stats();
@@ -42,7 +42,6 @@ export class AppComponent {
   async uploadFolder(event: any) {
     this.resetToDefault();
     this.isWait = true;
-    console.log('isWait set to true');
     const files = event.target.files;
     let promiseArr = []
     for (let i = 0; i <= files.length; i++) {

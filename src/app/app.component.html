@@ -3,7 +3,7 @@
     Use this to Count the pages in PDF Files
   </p>
   <p>
-    <input type="file" (click)="isWait=true" (change)="uploadFolder($event)" multiple accept="pdf/*" />
+    <input type="file" (click)="isWait=true" (change)="uploadFolder($event)" multiple accept="application/pdf" />
   </p>
 
   <span *ngIf='this.stats.result && this.stats.result.length'>
