@@ -22,6 +22,9 @@ Currently set to Auto-Deply. Can be changed to Manual Deploy
 https://itnext.io/how-to-deploy-angular-application-to-heroku-1d56e09c5147
 https://medium.com/better-programming/how-to-deploy-your-angular-9-app-to-heroku-in-minutes-51d171c2f0d
 
+For Logs:
+https://dashboard.heroku.com/apps/egangotri/logs
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).

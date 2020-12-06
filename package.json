@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "ng_start": "ng serve",
-    "start": "npm run build_for_prod && node server.js",
+    "start": "node server.js",
+    "serve" : "npm run build_for_prod && npm run start",
     "build": "ng build",
     "build_for_prod": "ng build  --prod",
     "copy_to_docs": "cpx \"./dist/eGangotri-page-counter/**\" ./docs/eGangotri-page-counter/",
