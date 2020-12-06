@@ -7,7 +7,7 @@
     "build": "ng build",    
     "build_for_prod": "ng build  --prod",
     "deploy": "ng build --prod --baseHref='https://eGangotri.github.io/egangotri_page_count/'",
-    "copy_to_docs": "cpx \"./dist/eGangotri-page-counter/**\" ./docs/",
+    "copy_to_docs": "cpx \"./dist/eGangotri-page-counter/**\" ./docs/eGangotri-page-counter/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
