@@ -36,7 +36,8 @@ export class AppComponent {
   }
 
   confirmationAlert() {
-    alert('Results Copied')
+    let msg = this.isWait === true ? 'Still calculating. Pls Wait' : 'Results Copied';
+    alert(msg);
   }
 
   async uploadFolder(event: any) {

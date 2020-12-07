@@ -23,36 +23,45 @@
               <td>{{row.counter}}</td>
               <td>{{row.name}}</td>
               <td align="right">{{row.pageCount}}</td>
-            </tr>
-            <tfoot class="tableLine">
-              <tr>
-              <td></td>
-              <td>Grand Total</td>
-              <td align="right">{{globalCount}}</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <button (click)="confirmationAlert()" tooltip="Click to Copy the Results"  mat-raised-button color="primary" [cdkCopyToClipboard]="clipboardResult()">Copy Results
-                  <mat-icon>content_copy
-                  </mat-icon>
-                </button>
-              </td>
-              <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <button (click)="this.stats.result=[]" tooltip="Click to Copy the Results"  mat-raised-button color="primary">Clear Results
-                    <mat-icon matTooltip="Clear Board">clear</mat-icon>
-                  </button>
-                </td>
-                <td></td>
-                </tr>
-            </tfoot>
+            </tr>..
+            <ng-container *ngTemplateOutlet="panel"></ng-container>
           </p>
         </table>
     </div>
 
   </span>
+
+  <ng-template #panel>
+    <tfoot class="tableLine">
+        <tr>
+        <td></td>
+        <td>Grand Total</td>
+        <td align="right">{{globalCount}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <button (click)="confirmationAlert()" 
+          tooltip="Click to Copy the Results"  
+          mat-raised-button color="primary"
+           [cdkCopyToClipboard]="clipboardResult()"
+           [disabled]="isWait">Copy Results
+            <mat-icon>content_copy
+            </mat-icon>
+          </button>
+        </td>
+        <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <button (click)="this.stats.result=[]" tooltip="Click to Copy the Results"  mat-raised-button color="primary">Clear Results
+              <mat-icon matTooltip="Clear Board">clear</mat-icon>
+            </button>
+          </td>
+          <td></td>
+          </tr>
+      </tfoot>
+    
+    </ng-template>
 </body>

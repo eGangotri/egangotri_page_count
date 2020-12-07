@@ -8,6 +8,7 @@
     "build": "ng build",
     "build_for_prod": "ng build  --prod",
     "serve" : "npm run build_for_prod && npm run start",
+    "nodemon": "nodemon server.js",
     "copy_to_docs": "cpx \"./dist/eGangotri-page-counter/**\" ./docs/eGangotri-page-counter/",
     "test": "ng test",
     "lint": "ng lint",
