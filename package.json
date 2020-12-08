@@ -14,7 +14,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "heroku-postbuild": "ng build --prod",
-    "git": "git add . && git commit -m 'commit' && git push"
+    "git": "git add . && git commit -m '${comment:-Commit-eGangotri-Page-Counter}' && git push"
   },
   "private": true,
   "dependencies": {

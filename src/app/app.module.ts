@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { HelperService } from './helper.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ClipboardModule,
     MatProgressSpinnerModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, HelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
