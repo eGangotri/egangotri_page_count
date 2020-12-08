@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PDFDocument } from 'pdf-lib';
+import { AppComponent } from './app.component';
+import { sizeInfo } from './utils/Utils';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +13,11 @@ export class HelperService {
     cpmnt.pdfCount = 0;
     cpmnt.isWait = true;
     cpmnt.timeOfRequest = '';
+    cpmnt.totalSize = 0;
   }
   constructor() { }
 
-  async uploadFolder(event: any, cmpt:any) {
+  async uploadFolder(event: any, cmpt:AppComponent) {
     cmpt.resetToDefault();
     const files = event.target.files;
     cmpt.pdfCount = files.length;
@@ -32,8 +35,9 @@ export class HelperService {
       console.log('isWait set to false');
     });
   }
-  clipboardResult(cmpnt:any) {
-    cmpnt.stats.header = `Page Count for [${cmpnt.pdfCount}] pdfs on ` + cmpnt.datePipe.transform(new Date(), 'd MMM yyyy hh:mm aa' + "\n")
+  
+  clipboardResult(cmpnt:AppComponent) {
+    cmpnt.stats.header = `${cmpnt.name}-Work Page Count for ${cmpnt.pdfCount} pdfs on ` + cmpnt.datePipe.transform(new Date(), 'd MMM yyyy hh:mm aa' + "\n")
     let clipBoardData = cmpnt.stats.header;
     for (let i = 0; i <= cmpnt.stats.result.length; i++) {
       let res = cmpnt.stats.result[i];
@@ -41,17 +45,20 @@ export class HelperService {
         clipBoardData += `${res?.counter} ${res?.name} ${res?.pageCount}\n`;
       }
     }
-    clipBoardData += `Total: ${cmpnt.globalCount}`;
+    clipBoardData += `Total Page Count: ${cmpnt.globalCount}`;
+    clipBoardData += `\nTotal Size: ${sizeInfo(cmpnt.totalSize)}`;
     return clipBoardData;
   }
 
-  async countPages(file: File, counter: number = 0,cmpnt:any) {
+  async countPages(file: File, counter: number = 0,cmpnt:AppComponent) {
     return file.arrayBuffer().then(async (buffer) => {
-      const pdfDoc4 = await PDFDocument.load(buffer, { ignoreEncryption: true })
-      const pageCount = pdfDoc4.getPageCount()
-      const row = { counter: "(" + (counter + 1) + ").", name: file.name, pageCount: pageCount };
+      const pdfDoc = await PDFDocument.load(buffer, { ignoreEncryption: true })
+      const pageCount = pdfDoc.getPageCount()
+      const pdfSize = sizeInfo(file.size);
+      const row = { counter: "(" + (counter + 1) + ").", name: file.name, pageCount: pageCount , pdfSize};
       cmpnt.stats.result.push(row);
       cmpnt.globalCount += pageCount;
+      cmpnt.totalSize += file.size;
       console.log(`Page Count # ${JSON.stringify(row)}`);
       return pageCount;
     }).catch((err) => {

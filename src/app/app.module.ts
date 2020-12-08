@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HelperService } from './helper.service';
+import { FormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -23,8 +25,9 @@ import { HelperService } from './helper.service';
     MatIconModule,
     ClipboardModule,
     MatProgressSpinnerModule,
+    FormsModule
   ],
-  providers: [DatePipe, HelperService],
+  providers: [DatePipe, HelperService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

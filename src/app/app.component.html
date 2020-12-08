@@ -1,6 +1,8 @@
 <body class="mainFile">
   <h1>eGangotri PDF Page Counter</h1>
   <p>
+    Please Enter your Name: <input type="text" #box (blur)="onBlur(box.value)" value="{{this.name}}" />
+  <p>
     <input type="file" (click)="resetToDefault()" (change)="uploadFolder($event)" multiple accept="application/pdf" />
   </p>
 
@@ -9,56 +11,51 @@
       <mat-spinner *ngIf="isWait" diameter="40" color="accent"></mat-spinner>
     </div>
     <div>
+      <ng-container *ngTemplateOutlet="panel"></ng-container>
       <div>{{this.stats.header}}</div>
-        <table>
-          <p id="resultTable">
-            <thead>
-              <ng-container *ngTemplateOutlet="panel"></ng-container>
-            </thead>
+      <table>
+        <p id="resultTable">
+          <thead>
             <tr>
-              <th>#</th>
-              <th>File Name</th>
-              <th>Page Count</th>
+              <td></td>
+              <td>Grand Total Page Count</td>
+              <td align="right">{{globalCount}}</td>
             </tr>
-            <tr *ngFor="let row of this.stats.result;let indexOfelement=index;">
-              <td>{{row.counter}}</td>
-              <td>{{row.name}}</td>
-              <td align="right">{{row.pageCount}}</td>
-            </tr>..
-          </p>
-        </table>
+            <tr>
+              <td></td>
+              <td>Grand Total Size</td>
+              <td align="right">{{getTotalSize()}}</td>
+            </tr>
+          </thead>
+          <tr>
+            <th>#</th>
+            <th>File Name</th>
+            <th>Page Count</th>
+            <th>PDF Size</th>
+          </tr>
+          <tr *ngFor="let row of this.stats.result;let indexOfelement=index;">
+            <td>{{row.counter}}</td>
+            <td>{{row.name}}</td>
+            <td align="right">{{row.pageCount}}</td>
+            <td align="right">{{row.pdfSize}}</td>
+          </tr>
+        </p>
+      </table>
     </div>
 
   </span>
 
   <ng-template #panel>
-        <tr>
-        <td></td>
-        <td>Grand Total</td>
-        <td align="right">{{globalCount}}</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>
-          <button (click)="confirmationAlert()" 
-          tooltip="Click to Copy the Results"  
-          mat-raised-button color="primary"
-           [cdkCopyToClipboard]="clipboardResult()"
-           [disabled]="isWait">Copy Results
-            <mat-icon>content_copy
-            </mat-icon>
-          </button>
-        </td>
-        <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <button (click)="resetToDefault()" tooltip="Click to Copy the Results"  mat-raised-button color="primary">Clear Results
-              <mat-icon matTooltip="Clear Board">clear</mat-icon>
-            </button>
-          </td>
-          <td></td>
-          </tr>
-    </ng-template>
+    <div>
+      <button (click)="confirmationAlert()" tooltip="Click to Copy the Results" mat-raised-button color="primary"
+        [cdkCopyToClipboard]="clipboardResult()" [disabled]="isWait">Copy Results
+        <mat-icon>content_copy
+        </mat-icon>
+      </button>&nbsp;
+      <button (click)="resetToDefault()" tooltip="Click to Copy the Results" mat-raised-button color="primary">Clear
+        Results
+        <mat-icon matTooltip="Clear Board">clear</mat-icon>
+      </button>
+    </div>
+  </ng-template>
 </body>
