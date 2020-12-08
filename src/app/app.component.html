@@ -1,9 +1,7 @@
 <body class="mainFile">
+  <h1>eGangotri PDF Page Counter</h1>
   <p>
-    Use this to Count the pages in PDF Files
-  </p>
-  <p>
-    <input type="file" (click)="isWait=true && this.stats.result = []" (change)="uploadFolder($event)" multiple accept="application/pdf" />
+    <input type="file" (click)="resetToDefault()" (change)="uploadFolder($event)" multiple accept="application/pdf" />
   </p>
 
   <span *ngIf='this.stats.result && this.stats.result.length'>
@@ -14,6 +12,9 @@
       <div>{{this.stats.header}}</div>
         <table>
           <p id="resultTable">
+            <thead>
+              <ng-container *ngTemplateOutlet="panel"></ng-container>
+            </thead>
             <tr>
               <th>#</th>
               <th>File Name</th>
@@ -24,7 +25,6 @@
               <td>{{row.name}}</td>
               <td align="right">{{row.pageCount}}</td>
             </tr>..
-            <ng-container *ngTemplateOutlet="panel"></ng-container>
           </p>
         </table>
     </div>
@@ -32,7 +32,6 @@
   </span>
 
   <ng-template #panel>
-    <tfoot class="tableLine">
         <tr>
         <td></td>
         <td>Grand Total</td>
@@ -55,13 +54,11 @@
         <tr>
           <td></td>
           <td>
-            <button (click)="this.stats.result=[]" tooltip="Click to Copy the Results"  mat-raised-button color="primary">Clear Results
+            <button (click)="resetToDefault()" tooltip="Click to Copy the Results"  mat-raised-button color="primary">Clear Results
               <mat-icon matTooltip="Clear Board">clear</mat-icon>
             </button>
           </td>
           <td></td>
           </tr>
-      </tfoot>
-    
     </ng-template>
 </body>

@@ -5,6 +5,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 View Execution at:
 https://egangotri.herokuapp.com/
 
+locally
+with npm run serve
+http://localhost:8080/
+
+with npm run ng_start
+http://localhost:4200/
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

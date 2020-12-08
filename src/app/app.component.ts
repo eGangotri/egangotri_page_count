@@ -13,22 +13,25 @@ export class AppComponent {
   globalCount = 0;
   isWait = false;
   stats: Stats = new Stats();
+  pdfCount = 0
 
   constructor(private datePipe: DatePipe) {
   }
 
   resetToDefault() {
-    this.globalCount = 0
-    this.stats.result = []
+    this.globalCount = 0;
+    this.stats.reset();
+    this.pdfCount = 0;
+    this.isWait = true;
   }
 
   clipboardResult() {
-    this.stats.header = "Page Count @ " + this.datePipe.transform(new Date(), 'd MMM yyyy hh:mm aa' + "\n")
+    this.stats.header = `Page Count for [${this.pdfCount}] pdfs on ` + this.datePipe.transform(new Date(), 'd MMM yyyy hh:mm aa' + "\n")
     let clipBoardData = this.stats.header;
     for (let i = 0; i <= this.stats.result.length; i++) {
-      let res = this.stats.result[i]
+      let res = this.stats.result[i];
       if (res) {
-        clipBoardData += `${res?.counter} ${res?.name} ${res?.pageCount}\n`
+        clipBoardData += `${res?.counter} ${res?.name} ${res?.pageCount}\n`;
       }
     }
     clipBoardData += `Total: ${this.globalCount}`;
@@ -42,8 +45,8 @@ export class AppComponent {
 
   async uploadFolder(event: any) {
     this.resetToDefault();
-    this.isWait = true;
     const files = event.target.files;
+    this.pdfCount = files.length;
     let promiseArr = []
     for (let i = 0; i <= files.length; i++) {
       let file = files[i]
