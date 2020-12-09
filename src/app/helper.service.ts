@@ -37,7 +37,6 @@ export class HelperService {
   }
   
   clipboardResult(cmpnt:AppComponent) {
-    cmpnt.stats.header = `${cmpnt.name}-Work Page Count for ${cmpnt.pdfCount} pdfs on ` + cmpnt.datePipe.transform(new Date(), 'd MMM yyyy hh:mm aa' + "\n")
     let clipBoardData = cmpnt.stats.header;
     for (let i = 0; i <= cmpnt.stats.result.length; i++) {
       let res = cmpnt.stats.result[i];
@@ -59,6 +58,7 @@ export class HelperService {
       cmpnt.stats.result.push(row);
       cmpnt.globalCount += pageCount;
       cmpnt.totalSize += file.size;
+      cmpnt.stats.header = `${cmpnt.name}-Work Page Count for ${cmpnt.pdfCount} pdfs on ` + cmpnt.datePipe.transform(new Date(), 'd MMM yyyy hh:mm aa' + "\n")
       console.log(`Page Count # ${JSON.stringify(row)}`);
       return pageCount;
     }).catch((err) => {
