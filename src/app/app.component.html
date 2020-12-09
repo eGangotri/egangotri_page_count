@@ -20,11 +20,15 @@
             <tr>
               <td></td>
               <td>Grand Total Page Count</td>
+              <td></td>
+              <td></td>
               <td align="right">{{globalCount}}</td>
             </tr>
             <tr>
               <td></td>
               <td>Grand Total Size</td>
+              <td></td>
+              <td></td>
               <td align="right">{{getTotalSize()}}</td>
             </tr>
           </thead>
@@ -32,12 +36,14 @@
             <th>#</th>
             <th>File Name</th>
             <th>Page Count</th>
+            <th>&nbsp;&nbsp;</th>
             <th>PDF Size</th>
           </tr>
           <tr *ngFor="let row of this.stats.result;let indexOfelement=index;">
             <td>{{row.counter}}</td>
             <td>{{row.name}}</td>
             <td align="right">{{row.pageCount}}</td>
+            <td>&nbsp;&nbsp;</td>
             <td align="right">{{row.pdfSize}}</td>
           </tr>
         </p>
