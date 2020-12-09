@@ -37,11 +37,11 @@ export class HelperService {
   }
   
   clipboardResult(cmpnt:AppComponent) {
-    let clipBoardData = cmpnt.stats.header;
+    let clipBoardData = cmpnt.stats.header + '\n';
     for (let i = 0; i <= cmpnt.stats.result.length; i++) {
       let res = cmpnt.stats.result[i];
       if (res) {
-        clipBoardData += `${res?.counter} ${res?.name} ${res?.pageCount}\n`;
+        clipBoardData += `${res?.counter} ${res?.name} ${res?.pageCount} ${res?.pdfSize}\n\n`;
       }
     }
     clipBoardData += `Total Page Count: ${cmpnt.globalCount}`;
@@ -54,7 +54,7 @@ export class HelperService {
       const pdfDoc = await PDFDocument.load(buffer, { ignoreEncryption: true })
       const pageCount = pdfDoc.getPageCount()
       const pdfSize = sizeInfo(file.size);
-      const row = { counter: "(" + (counter + 1) + ").", name: file.name, pageCount: pageCount , pdfSize};
+      const row = { counter: "(" + (counter + 1) + ").", name: file.name, pageCount , pdfSize};
       cmpnt.stats.result.push(row);
       cmpnt.globalCount += pageCount;
       cmpnt.totalSize += file.size;
