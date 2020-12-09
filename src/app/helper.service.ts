@@ -63,6 +63,7 @@ export class HelperService {
       return pageCount;
     }).catch((err) => {
       console.log("Err", err);
+      const row = { counter: "(" + (counter + 1) + ").", name: file.name, pageCount: 'ERROR-READING', pdfSize:sizeInfo(file.size)};
       return 0;
     });
   }
