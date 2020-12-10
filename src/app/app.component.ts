@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers:  [ HelperService ]
+  providers: [HelperService]
 
 })
 export class AppComponent implements OnInit {
@@ -21,36 +21,42 @@ export class AppComponent implements OnInit {
   pdfCount = 0
   timeOfRequest = '';
   name = ''
+  errorCount = 0;
 
-  constructor(public datePipe: DatePipe, private service: HelperService, private cookieService:CookieService)  {
+  constructor(public datePipe: DatePipe, private service: HelperService, private cookieService: CookieService) {
   }
 
   ngOnInit(): void {
     const userName = this.cookieService.get('user-name')
-    if(userName && userName.length > 0){
+    if (userName && userName.length > 0) {
       this.name = userName;
     }
 
   }
 
-  onBlur(value: string) { 
-    this.name = value; 
-    this.cookieService.set('user-name', this.name );
+  onBlur(value: string) {
+    this.name = value;
+    this.cookieService.set('user-name', this.name);
   }
 
   resetToDefault() {
     this.service.resetToDefault(this);
   }
 
-  getTotalSize(){
+  getTotalSize() {
     return sizeInfo(this.totalSize);
   }
 
   async uploadFolder(event: any) {
-    return this.service.uploadFolder(event,this);
+    if(!this.name){
+      alert('Please enter your Name and then retry again')
+    } 
+    else {
+      return this.service.uploadFolder(event, this);
+    }
   }
 
-  clipboardResult(){
+  clipboardResult() {
     return this.service.clipboardResult(this);
   }
 

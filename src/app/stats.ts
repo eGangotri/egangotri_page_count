@@ -1,5 +1,6 @@
 export class Stats {
     header:string = "";
+    errorMsgs:string = "";
     result:any[] = [];
     footer:string = "";
 

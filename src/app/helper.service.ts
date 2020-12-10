@@ -7,13 +7,14 @@ import { sizeInfo } from './utils/Utils';
   providedIn: 'root'
 })
 export class HelperService {
-  resetToDefault(cpmnt:any) {
+  resetToDefault(cpmnt:AppComponent) {
     cpmnt.globalCount = 0;
     cpmnt.stats.reset();
     cpmnt.pdfCount = 0;
     cpmnt.isWait = true;
     cpmnt.timeOfRequest = '';
     cpmnt.totalSize = 0;
+    cpmnt.errorCount = 0;
   }
   constructor() { }
 
@@ -33,11 +34,17 @@ export class HelperService {
       console.log(values);
       cmpt.isWait = false;
       console.log('isWait set to false');
+      if(cmpt.errorCount > 0 ){
+        cmpt.stats.errorMsgs = `${cmpt.errorCount} file(s) recorded errors and couldnt be added`;
+      }
     });
   }
   
   clipboardResult(cmpnt:AppComponent) {
     let clipBoardData = cmpnt.stats.header + '\n';
+    if(cmpnt.stats.errorMsgs){
+      clipBoardData += cmpnt.stats.errorMsgs + '\n';
+    } 
     for (let i = 0; i <= cmpnt.stats.result.length; i++) {
       let res = cmpnt.stats.result[i];
       if (res) {
@@ -63,6 +70,7 @@ export class HelperService {
       return pageCount;
     }).catch((err) => {
       console.log("Err", err);
+      cmpnt.errorCount++;
       const row = { counter: "(" + (counter + 1) + ").", name: "****"+file.name, pageCount: 'ERROR-READING', pdfSize:sizeInfo(file.size), "error":true};
       cmpnt.stats.result.push(row);
       cmpnt.totalSize += file.size;

@@ -13,7 +13,10 @@
     <div>
       <ng-container *ngTemplateOutlet="panel"></ng-container>
       <div></div>
-      <div>{{this.stats.header}}</div>
+      <br>
+      <div class="{{this.errorCount > 0 ? 'errorRow': ''}}" >{{this.stats.header}}</div>
+      <div class="errorRow" *ngIf='this.errorCount > 0'>{{stats.errorMsgs}}</div>
+
       <table>
         <p id="resultTable">
           <thead>
@@ -42,7 +45,7 @@
           <tr *ngFor="let row of this.stats.result;let indexOfelement=index;">
             <td>{{row.counter}}</td>
             <td class="{{row.error === true ? 'errorRow': ''}}">{{row.name}}</td>
-            <td align="right">{{row.pageCount}}</td>
+            <td align="right" class="{{row.error === true ? 'errorRow': ''}}">{{row.pageCount}}</td>
             <td>&nbsp;&nbsp;</td>
             <td align="right">{{row.pdfSize}}</td>
           </tr>
