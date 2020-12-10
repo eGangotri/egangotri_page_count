@@ -41,7 +41,7 @@
           </tr>
           <tr *ngFor="let row of this.stats.result;let indexOfelement=index;">
             <td>{{row.counter}}</td>
-            <td>{{row.name}}</td>
+            <td class="{{row.error === true ? 'errorRow': ''}}">{{row.name}}</td>
             <td align="right">{{row.pageCount}}</td>
             <td>&nbsp;&nbsp;</td>
             <td align="right">{{row.pdfSize}}</td>

@@ -63,7 +63,11 @@ export class HelperService {
       return pageCount;
     }).catch((err) => {
       console.log("Err", err);
-      const row = { counter: "(" + (counter + 1) + ").", name: file.name, pageCount: 'ERROR-READING', pdfSize:sizeInfo(file.size)};
+      const row = { counter: "(" + (counter + 1) + ").", name: "****"+file.name, pageCount: 'ERROR-READING', pdfSize:sizeInfo(file.size), "error":true};
+      cmpnt.stats.result.push(row);
+      cmpnt.totalSize += file.size;
+      cmpnt.stats.header = `${cmpnt.name}-Work Page Count for ${cmpnt.pdfCount} pdfs on ` + cmpnt.datePipe.transform(new Date(), 'd MMM yyyy hh:mm aa' + "\n")
+      console.log(`Page Count # ${JSON.stringify(row)}`);
       return 0;
     });
   }
