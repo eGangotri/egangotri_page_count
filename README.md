@@ -51,5 +51,8 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Docker
 docker build . -t egangotri/egangotri-page-counter
-docker run -d -p 8080:80  egangotri/egangotri-page-counter:latest 
+docker run -d -p 8080:80  egangotri/egangotri-page-counter:latest
+docker login
+docker push  egangotri/egangotri-page-counter
+
 http://ip_address:80/
