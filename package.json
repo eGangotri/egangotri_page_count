@@ -6,14 +6,14 @@
     "ng_start": "ng serve",
     "start": "node server.js",
     "build": "ng build",
-    "build_for_prod": "ng build  --prod",
+    "build_for_prod": "ng build --configuration production",
     "serve": "npm run build_for_prod && npm run start",
     "nodemon": "nodemon server.js",
     "copy_to_docs": "cpx \"./dist/eGangotri-page-counter/**\" ./docs/eGangotri-page-counter/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod",
+    "heroku-postbuild": "ng build --configuration production",
     "git": "git add . && git commit -m '${comment:-Commit-eGangotri-Page-Counter}' && git push"
   },
   "private": true,
@@ -50,7 +50,7 @@
     "typescript": "4.4.4"
   },
   "engines": {
-    "node": "16.13.0",
-    "npm": "8.1.0"
+    "node": "16.14.2",
+    "npm": "8.6.0"
   }
 }

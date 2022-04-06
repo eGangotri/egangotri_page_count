@@ -50,5 +50,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Docker
-docker run -d -p 80:80  egangotri/egangotri-page-counter:latest 
+docker build . -t egangotri/egangotri-page-counter
+docker run -d -p 8080:80  egangotri/egangotri-page-counter:latest 
 http://ip_address:80/

@@ -13,7 +13,8 @@ RUN npm install
 # add app
 COPY . /app
 
-EXPOSE 80
 
-# start app
-CMD ng serve --host 0.0.0.0
+EXPOSE 80
+EXPOSE 8080
+
+CMD ["npm", "run", "serve"]
